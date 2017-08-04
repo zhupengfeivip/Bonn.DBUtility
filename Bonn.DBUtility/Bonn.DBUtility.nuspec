@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>zhupengfei</authors>
+    <owners>zhupengfei</owners>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseUrl>
+    <projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>
+    <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>数据库助手，包含SQLSERVER,ACCESS等</description>
+    <releaseNotes>无</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>C# WinForm ASP.NET</tags>
+  </metadata>
+</package>
