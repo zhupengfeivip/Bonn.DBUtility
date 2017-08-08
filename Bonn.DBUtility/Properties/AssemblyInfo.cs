@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过下列属性集
 // 控制。更改这些属性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("DBUtility")]
+[assembly: AssemblyTitle("Bonn.DBUtility")]
 #if DEBUG
 [assembly: AssemblyDescription("DEBUG")]
 #else
@@ -13,7 +13,7 @@ using System.Runtime.InteropServices;
 #endif
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("DBUtility")]
+[assembly: AssemblyProduct("Bonn.DBUtility")]
 [assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
