@@ -362,6 +362,27 @@ namespace Bonn.Helper
             return dt.AddMonths(0 - (dt.Month - 1) % 3).AddDays(1 - dt.Day);  //本季度初
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dateTime"></param>
+        /// <returns></returns>
+        public static string GetSpanStringAndNow(DateTime dateTime)
+        {
+            string span = "";
+            TimeSpan ts = DateTime.Now - dateTime;
+            if (ts.Days > 0)
+                span += $"{ts.Days}天";
+            if (ts.Hours > 0)
+                span += $"{ts.Hours}小时";
+            if (ts.Minutes > 0)
+                span += $"{ts.Minutes}分钟";
+            if (ts.Seconds > 0)
+                span += $"{ts.Seconds}秒";
+
+            return span;
+        }
+
         #region 设置本地时间
 
         [DllImport("kernel32.dll")]
