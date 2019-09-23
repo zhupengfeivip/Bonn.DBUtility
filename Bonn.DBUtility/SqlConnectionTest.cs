@@ -26,7 +26,7 @@ namespace Bonn.DBUtility
         public event DBConnectionTestEventHandler ConnectionTestResult;
 
         /// <summary>
-        /// 开始连接测试
+        /// 开始连接测试，异步测试
         /// </summary>
         /// <param name="connectionString">数据库连接字符串</param>
         /// <param name="maxTestTime">最大允许的测试时间，以秒为单位</param>
@@ -60,6 +60,9 @@ namespace Bonn.DBUtility
             }
         }
 
+        /// <summary>
+        /// 测试线程
+        /// </summary>
         private void TestThread()
         {
             try
@@ -77,8 +80,30 @@ namespace Bonn.DBUtility
             {
                 OnConnectionTest(false);
             }
-
         }
+
+        /// <summary>
+        /// 同步测试方法
+        /// </summary>
+        /// <param name="connectionString">数据库连接字符串</param>
+        public bool TestConn(string connectionString)
+        {
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    cn.Open();
+                    if (cn.State == ConnectionState.Open)
+                        return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return false;
+        }
+
     }
 
     /// <summary>

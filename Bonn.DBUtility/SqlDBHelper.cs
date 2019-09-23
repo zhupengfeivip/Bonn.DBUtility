@@ -81,6 +81,30 @@ namespace Bonn.DBUtility
             }
         }
 
+        /// <summary>
+        /// 拼接数据库连接字符串
+        /// </summary>
+        /// <param name="server"></param>
+        /// <param name="db"></param>
+        /// <param name="user"></param>
+        /// <param name="pwd"></param>
+        /// <param name="port"></param>
+        /// <param name="connType">0 windows身份验证 1 sqlserver身份验证 </param>
+        /// <returns></returns>
+        public static string BuildConnString(string server, string db, string user, string pwd, short port = 1433, byte connType = 1)
+        {
+            if (connType == 0)
+            {
+                throw new Exception("暂未实现");
+            }
+            else
+            {
+                //示例：Data Source=127.0.0.1,1433;Initial Catalog=MCFL;Persist Security Info=True;User ID=sa;Password=shujt
+                return $"Data Source={server},{port};Initial Catalog={db};Persist Security Info=True;User ID={user};Password={pwd}";
+            }
+           
+        }
+
 
         /// <summary>
         /// 是否加密数据库连接字符串
@@ -2848,8 +2872,8 @@ namespace Bonn.DBUtility
                 throw new Exception("更新的字段不能为空");
             StringBuilder strSql = new StringBuilder();
             StringBuilder strParameter = new StringBuilder();
-            strSql.Append("INSERT INTO " + strTableName + " ( ");
-            strParameter.Append(" VALUES ( ");
+            strSql.Append("INSERT INTO " + strTableName + " (");
+            strParameter.Append(" VALUES (");
 
             SqlParameter[] parameter = new SqlParameter[dict.Count];
 
@@ -3227,9 +3251,9 @@ namespace Bonn.DBUtility
         /// 
         /// </summary>
         /// <param name="tableName"></param>
-        /// <param name="sqlWhere"></param>
+        /// <param name="sqlWhere">格式 如 WHERE 1 = 1 </param>
         /// <param name="trans"></param>
-        /// <param name="ascString"></param>
+        /// <param name="ascString">格式 order by id desc</param>
         /// <returns></returns>
         public static DataTable GetRecords(string tableName, string sqlWhere = null, SqlTransaction trans = null, string ascString = null)
         {
