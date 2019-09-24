@@ -2296,11 +2296,11 @@ namespace Bonn.DBUtility
         /// <param name="columns">SQL查询语句列名</param>
         /// <param name="tableName">SQL查询语句表名，不能包含条件</param>
         /// <param name="condition">查询条件, 不用加where关键字，格式为" AND 1 = 1 "</param>
-        /// <param name="parameters"></param>
-        /// <param name="ascColumn">排序的字段名 (即 order by column asc/desc)</param>
+        /// <param name="parameters">查询语句相关参数</param>
+        /// <param name="ascColumn">排序的字段名，传入字段名即可</param>
         /// <param name="bitOrderType">排序的类型 (0为升序,1为降序)</param>
         /// <param name="totalSqlString"></param>
-        /// <param name="totalData">总记录数</param>
+        /// <param name="totalData">总记录数，汇总字段</param>
         /// <returns>返回数据集Datatable</returns>
         public static DataTable Get2005PagedDataTable(int pageSize, int currentPageIndex, string columns, string tableName, string condition,
             IEnumerable<SqlParameter> parameters, string ascColumn, int bitOrderType,
