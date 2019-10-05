@@ -2320,14 +2320,13 @@ namespace Bonn.DBUtility
                 IEnumerable<SqlParameter> sqlParams2 = CopySqlParameter(sqlParameters);
 
                 //获取汇总数据
-                countSql.AppendFormat("SELECT COUNT(*) {0} FROM {1} WHERE 1 = 1 {2} ", totalSqlString, tableName, condition);
+                countSql.AppendFormat($"SELECT COUNT(*) {totalSqlString} FROM {tableName} WHERE 1 = 1 {condition} ");
 
                 int beginNo = pageSize * (currentPageIndex - 1) + 1;
                 int endNo = pageSize * (currentPageIndex);
                 string orderType = bitOrderType == 1 ? " DESC" : "";
-                strSql.AppendFormat(@"SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY {3}{6}) AS NO, {0} 
-                    FROM {1} WHERE 1 = 1 {2}) t WHERE  t.NO BETWEEN {4} AND {5}"
-                    , columns, tableName, condition, ascColumn, beginNo, endNo, orderType);
+                strSql.AppendFormat($@"SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY {ascColumn}{orderType}) AS NO, {columns} 
+                    FROM {tableName} WHERE 1 = 1 {condition}) t WHERE  t.NO BETWEEN {beginNo} AND {endNo}");
 
                 totalData = QueryDt(countSql.ToString(), sqlParams1);
                 result = QueryDt(strSql.ToString(), sqlParams2);
