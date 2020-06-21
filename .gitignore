@@ -5,3 +5,4 @@
 *.nupkg
 bin
 obj
+/.vs
