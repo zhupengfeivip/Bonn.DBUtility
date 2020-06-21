@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bonn.DBUtility", "Bonn.DBUtility\Bonn.DBUtility.csproj", "{8A4D24B2-3C5E-41CA-A427-733F7F8325C6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bonn.Helper", "Bonn.Helper\Bonn.Helper.csproj", "{8943F99D-CBF1-41B2-B916-4F44CAA1E9F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bonn.SqliteUtility", "Bonn.SqliteUtility\Bonn.SqliteUtility.csproj", "{E93F365C-41CF-4C7B-BFB9-AEC0724189E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,8 +43,23 @@ Global
 		{8943F99D-CBF1-41B2-B916-4F44CAA1E9F3}.Release|x64.Build.0 = Release|Any CPU
 		{8943F99D-CBF1-41B2-B916-4F44CAA1E9F3}.Release|x86.ActiveCfg = Release|Any CPU
 		{8943F99D-CBF1-41B2-B916-4F44CAA1E9F3}.Release|x86.Build.0 = Release|Any CPU
+		{E93F365C-41CF-4C7B-BFB9-AEC0724189E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E93F365C-41CF-4C7B-BFB9-AEC0724189E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E93F365C-41CF-4C7B-BFB9-AEC0724189E7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E93F365C-41CF-4C7B-BFB9-AEC0724189E7}.Debug|x64.Build.0 = Debug|Any CPU
+		{E93F365C-41CF-4C7B-BFB9-AEC0724189E7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E93F365C-41CF-4C7B-BFB9-AEC0724189E7}.Debug|x86.Build.0 = Debug|Any CPU
+		{E93F365C-41CF-4C7B-BFB9-AEC0724189E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E93F365C-41CF-4C7B-BFB9-AEC0724189E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E93F365C-41CF-4C7B-BFB9-AEC0724189E7}.Release|x64.ActiveCfg = Release|Any CPU
+		{E93F365C-41CF-4C7B-BFB9-AEC0724189E7}.Release|x64.Build.0 = Release|Any CPU
+		{E93F365C-41CF-4C7B-BFB9-AEC0724189E7}.Release|x86.ActiveCfg = Release|Any CPU
+		{E93F365C-41CF-4C7B-BFB9-AEC0724189E7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B4E6FA15-6932-4F51-A1A7-CDE0E67CBB62}
 	EndGlobalSection
 EndGlobal
