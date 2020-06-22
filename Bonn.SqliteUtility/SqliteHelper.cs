@@ -199,9 +199,9 @@ namespace Bonn.SqliteUtility
                 if (parameter == null) continue;
                 dbCommand.Parameters.Add(parameter);
 
-                strColumnSql.Append($"[{kpr.Key}],");
+                strColumnSql.Append($"{kpr.Key},");
 
-                strParameter.Append("@Para" + paraIndex + " ,");
+                strParameter.Append($"@{kpr.Key} ,");
             }
             strParameter.Remove(strParameter.Length - 1, 1);
             strParameter.Append(" ) ");
