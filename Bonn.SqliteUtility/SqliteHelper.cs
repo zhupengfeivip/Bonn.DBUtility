@@ -318,10 +318,14 @@ namespace Bonn.SqliteUtility
         /// <returns></returns>
         public static int SafeDelete(string tableName, Dictionary<string, object> para = null, SQLiteTransaction trans = null)
         {
-            SQLiteConnection conn = GetConn(); //getConn():得到连接对象OleDbConnection conn = getConn(); //getConn():得到连接对象
+            SQLiteConnection conn;
+            if (trans != null)
+                conn = trans.Connection;
+            else
+                conn = GetConn(); //getConn():得到连接对象OleDbConnection conn = getConn(); //getConn():得到连接对象
             try
             {
-                conn.Open();
+                if (conn.State != ConnectionState.Open) conn.Open();
 
                 SQLiteCommand dbCommand = new SQLiteCommand();
                 dbCommand.Connection = conn;
@@ -361,7 +365,7 @@ namespace Bonn.SqliteUtility
             }
             finally
             {
-                conn.Close();
+                if (trans == null) conn.Close();
             }
         }
 
