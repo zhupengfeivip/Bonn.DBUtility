@@ -63,24 +63,24 @@ namespace Bonn.SqliteUtility
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public static void CreateTable()
-        {
-            using (SQLiteConnection conn = GetConn())
-            {
-                if (conn.State != System.Data.ConnectionState.Open)
-                {
-                    conn.Open();
-                    SQLiteCommand cmd = new SQLiteCommand();
-                    cmd.Connection = conn;
-                    cmd.CommandText = "CREATE TABLE t1(id varchar(4),score int)";
-                    cmd.ExecuteNonQuery();
-                }
-                conn.Close();
-            }
-        }
+        ///// <summary>
+        ///// 创建表
+        ///// </summary>
+        //public static void CreateTable()
+        //{
+        //    using (SQLiteConnection conn = GetConn())
+        //    {
+        //        if (conn.State != System.Data.ConnectionState.Open)
+        //        {
+        //            conn.Open();
+        //            SQLiteCommand cmd = new SQLiteCommand();
+        //            cmd.Connection = conn;
+        //            cmd.CommandText = "CREATE TABLE t1(id varchar(4),score int)";
+        //            cmd.ExecuteNonQuery();
+        //        }
+        //        conn.Close();
+        //    }
+        //}
 
         /// <summary>
         /// 
