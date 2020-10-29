@@ -92,6 +92,13 @@
             </summary>
             <param name="component"></param>
         </member>
+        <member name="M:SQLite.Designer.SQLiteAdapterDesigner.CanExtend(System.Object)">
+            <summary>
+            We extend support for DbDataAdapter-derived objects
+            </summary>
+            <param name="extendee">The object wanting to be extended</param>
+            <returns>Whether or not we extend that object</returns>
+        </member>
         <member name="P:SQLite.Designer.SQLiteAdapterDesigner.Verbs">
             <summary>
             Forwards to the SqlDataAdapterDesigner object
@@ -101,13 +108,6 @@
             <summary>
             Forwards to the SqlDataAdapterDesigner object
             </summary>
-        </member>
-        <member name="M:SQLite.Designer.SQLiteAdapterDesigner.CanExtend(System.Object)">
-            <summary>
-            We extend support for DbDataAdapter-derived objects
-            </summary>
-            <param name="extendee">The object wanting to be extended</param>
-            <returns>Whether or not we extend that object</returns>
         </member>
         <member name="T:SQLite.Designer.SQLiteCommandDesigner">
             <summary>
@@ -299,7 +299,7 @@
         <member name="F:SQLite.Designer.SQLiteOptions.syncRoot">
             <summary>
             This is used to synchronize access to the static dictionary of
-            options and <see cref="T:System.Data.Common.DbProviderFactory" /> objects.
+            options and <see cref="T:System.Data.Common.DbProviderFactory"/> objects.
             </summary>
         </member>
         <member name="F:SQLite.Designer.SQLiteOptions.options">
@@ -312,7 +312,7 @@
         </member>
         <member name="F:SQLite.Designer.SQLiteOptions.dbProviderFactories">
             <summary>
-            This dictionary contains the <see cref="T:System.Data.Common.DbProviderFactory" />
+            This dictionary contains the <see cref="T:System.Data.Common.DbProviderFactory"/>
             objects cached by this class.
             </summary>
         </member>
@@ -323,7 +323,7 @@
             </summary>
             <param name="reset">
             Non-zero to reset the options if they are already initialized.
-            When this method is called from the <see cref="T:SQLite.Designer.SQLitePackage" />
+            When this method is called from the <see cref="T:SQLite.Designer.SQLitePackage"/>
             constructor, this value should always be true.
             </param>
         </member>
@@ -369,11 +369,11 @@
         <member name="M:SQLite.Designer.SQLiteOptions.SelectProviderName(System.Windows.Forms.ComboBox)">
             <summary>
             This method attempts to select the configured ADO.NET provider name
-            in the specified <see cref="T:System.Windows.Forms.ComboBox" />.  This method will only
+            in the specified <see cref="T:System.Windows.Forms.ComboBox"/>.  This method will only
             work correctly when called from the user-interface thread.
             </summary>
             <param name="comboBox">
-            The <see cref="T:System.Windows.Forms.ComboBox" /> object where the selection is to be
+            The <see cref="T:System.Windows.Forms.ComboBox"/> object where the selection is to be
             modified.
             </param>
             <returns>
@@ -390,13 +390,13 @@
             or an empty string will cause this method to return false.
             </param>
             <returns>
-            Non-zero if the <see cref="T:System.Data.Common.DbProviderFactory" /> was created or
+            Non-zero if the <see cref="T:System.Data.Common.DbProviderFactory"/> was created or
             queried successfully; otherwise, zero.
             </returns>
         </member>
         <member name="M:SQLite.Designer.SQLiteOptions.GetProviderFactory(System.String,System.Boolean,System.Data.Common.DbProviderFactory@)">
             <summary>
-            Gets the cached <see cref="T:System.Data.Common.DbProviderFactory" /> object associated
+            Gets the cached <see cref="T:System.Data.Common.DbProviderFactory"/> object associated
             with the specified name, creating a new instance if necessary.
             </summary>
             <param name="name">
@@ -408,22 +408,22 @@
             necessary.
             </param>
             <param name="dbProviderFactory">
-            The newly created <see cref="T:System.Data.Common.DbProviderFactory" /> object or null
+            The newly created <see cref="T:System.Data.Common.DbProviderFactory"/> object or null
             if it is unavailable or could not be created.
             </param>
             <returns>
-            Non-zero if the <see cref="T:System.Data.Common.DbProviderFactory" /> was created or
+            Non-zero if the <see cref="T:System.Data.Common.DbProviderFactory"/> was created or
             queried successfully; otherwise, zero.
             </returns>
         </member>
         <member name="M:SQLite.Designer.SQLiteOptions.AddProviderNames(System.Windows.Forms.ComboBox.ObjectCollection)">
             <summary>
-            This method populates the specified <see cref="T:System.Windows.Forms.ComboBox" /> item
+            This method populates the specified <see cref="T:System.Windows.Forms.ComboBox"/> item
             list with the recognized ADO.NET provider names.  This method will
             only work correctly when called from the user-interface thread.
             </summary>
             <param name="items">
-            The <see cref="P:System.Windows.Forms.ComboBox.Items" /> property value containing the
+            The <see cref="P:System.Windows.Forms.ComboBox.Items"/> property value containing the
             list of items to be modified.  This value cannot be null.
             </param>
             <returns>
@@ -467,7 +467,7 @@
             the System.Data.SQLite design-time components.
             </summary>
             <returns>
-            An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of strings containing the list of
+            An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of strings containing the list of
             option keys supported by the System.Data.SQLite design-time
             components -OR- null in the event of any failure.
             </returns>

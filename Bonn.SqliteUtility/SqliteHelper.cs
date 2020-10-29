@@ -38,7 +38,7 @@ namespace Bonn.SqliteUtility
         public static SQLiteConnection GetConn(string filePath)
         {
             string connstr = GetConnString(filePath);
-            SQLiteConnection tempconn = new SQLiteConnection(connstr);
+            SQLiteConnection tempconn = new SQLiteConnection(connstr);            
             return tempconn;
         }
 
