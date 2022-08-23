@@ -35,7 +35,7 @@ namespace Bonn.Helper
         }
 
         /// <summary>
-        ///字符串转换为数组
+        ///字符串转换为字节，只处理数字串最左边2个数字，长度小于2返回0x00
         /// 如 1234 转换为{ 0x12 }
         /// </summary>
         /// <param name="str"></param>
@@ -105,8 +105,10 @@ namespace Bonn.Helper
         {
             if (string.IsNullOrWhiteSpace(str))
                 return 0;
+
             if (str == "&nbsp;")
                 return 0;
+
             return Convert.ToByte(str, 2);
         }
 

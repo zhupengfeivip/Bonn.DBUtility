@@ -238,9 +238,9 @@ namespace Bonn.Helper
         {
             int iNum = 0;
             foreach (byte b in userData)
-                iNum = iNum + Convert.ToInt32(b);
-            int rem = 0;
-            System.Math.DivRem(iNum, 256, out rem);
+                iNum += Convert.ToInt32(b);
+            int rem;
+            Math.DivRem(iNum, 256, out rem);
             return Convert.ToByte(rem);
         }
     }

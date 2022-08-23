@@ -38,7 +38,7 @@ namespace Bonn.SqliteUtility
         public static SQLiteConnection GetConn(string filePath)
         {
             string connstr = GetConnString(filePath);
-            SQLiteConnection tempconn = new SQLiteConnection(connstr);            
+            SQLiteConnection tempconn = new SQLiteConnection(connstr);
             return tempconn;
         }
 
@@ -377,6 +377,16 @@ namespace Bonn.SqliteUtility
         /// <param name="tableName"></param>
         /// <param name="para"></param>
         /// <param name="trans"></param>
+        /// <example>
+        /// <code>
+        /// para.Add(">=OperatorName", mdl.OperatorName);
+        /// para.Add("<>OperatorName", mdl.OperatorName);
+        /// para.Add("=OperatorName", mdl.OperatorName);
+        /// para.Add("OperatorName", mdl.OperatorName); //和=OperatorName相同
+        /// 
+        /// int count = GetExistedRows(dict);
+        /// </code>
+        /// </example>
         /// <returns></returns>
         public static int GetExistedRows(string tableName, Dictionary<string, object> para = null, SQLiteTransaction trans = null)
         {
@@ -407,8 +417,8 @@ namespace Bonn.SqliteUtility
                         string colName;
                         string op;
                         GetColAndOp(kpr.Key, out colName, out op);
-                        strSql += $"AND [{colName}] {op} @{colName} ";
-                        SQLiteParameter parameter = DictValueToParam(colName, kpr.Value);
+                        strSql += $"AND [{colName}] {op} @Para{paraIndex} ";
+                        SQLiteParameter parameter = DictValueToParam($"Para{paraIndex}", kpr.Value);
                         dbCommand.Parameters.Add(parameter);
 
                         paraIndex++;
@@ -468,9 +478,8 @@ namespace Bonn.SqliteUtility
         /// <returns></returns>
         public static DataTable QueryDt(string strSql, IEnumerable<SQLiteParameter> sqlParameter = null, SQLiteTransaction trans = null)
         {
-            return Query(strSql,sqlParameter,trans).Tables[0];
+            return Query(strSql, sqlParameter, trans).Tables[0];
         }
-
 
         /// <summary>
         /// 分页函数
@@ -510,6 +519,55 @@ namespace Bonn.SqliteUtility
                 int endNo = pageSize * (currentPageIndex);
                 string orderType = bitOrderType == 1 ? " DESC" : "";
                 strSql.AppendFormat($@"SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY {ascColumn}{orderType}) AS NO, {columns} 
+                    FROM {tableName} WHERE 1 = 1 {condition}) t WHERE  t.NO BETWEEN {beginNo} AND {endNo}");
+
+                totalData = QueryDt(countSql.ToString(), sqlParams1);
+                result = QueryDt(strSql.ToString(), sqlParams2);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 分页函数
+        /// </summary>
+        /// <param name="pageSize">每页多少条数据</param>
+        /// <param name="currentPageIndex">当前是第几页</param>
+        /// <param name="columns">SQL查询语句列名</param>
+        /// <param name="tableName">SQL查询语句表名，不能包含条件</param>
+        /// <param name="condition">查询条件, 不用加where关键字，格式为" AND 1 = 1 "</param>
+        /// <param name="parameters">查询语句相关参数</param>
+        /// <param name="ascColumn">排序的字段名，传入字段名即可</param>
+        /// <param name="bitOrderType">排序的类型 (0为升序,1为降序)</param>
+        /// <param name="totalSqlString"></param>
+        /// <param name="totalData">总记录数，汇总字段</param>
+        /// <returns>返回数据集Datatable</returns>
+        public static DataTable Get2005PagedDataTable(int pageSize, int currentPageIndex, string columns, string tableName, string condition,
+            IEnumerable<SQLiteParameter> parameters, string ascColumn,
+            string totalSqlString, out DataTable totalData)
+        {
+            DataTable result;
+            if (pageSize <= 0 || currentPageIndex <= 0)
+                throw new Exception("每页记录数或者当前页数不正确");
+
+            try
+            {
+                StringBuilder strSql = new StringBuilder();
+                StringBuilder countSql = new StringBuilder();
+
+                IEnumerable<SQLiteParameter> sqlParameters = parameters as SQLiteParameter[] ?? parameters.ToArray();
+                IEnumerable<SQLiteParameter> sqlParams1 = CopySqlParameter(sqlParameters);
+                IEnumerable<SQLiteParameter> sqlParams2 = CopySqlParameter(sqlParameters);
+
+                //获取汇总数据
+                countSql.AppendFormat($"SELECT COUNT(*) {totalSqlString} FROM {tableName} WHERE 1 = 1 {condition} ");
+
+                int beginNo = pageSize * (currentPageIndex - 1) + 1;
+                int endNo = pageSize * (currentPageIndex);
+                strSql.AppendFormat($@"SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY {ascColumn}) AS NO, {columns} 
                     FROM {tableName} WHERE 1 = 1 {condition}) t WHERE  t.NO BETWEEN {beginNo} AND {endNo}");
 
                 totalData = QueryDt(countSql.ToString(), sqlParams1);
@@ -589,13 +647,18 @@ namespace Bonn.SqliteUtility
         /// </summary>
         /// <param name="key"></param>
         /// <param name="colName"></param>
-        /// <param name="op"></param>
+        /// <param name="op">默认为=</param>
         public static void GetColAndOp(string key, out string colName, out string op)
         {
             op = "=";
             colName = key;
-            if (key.StartsWith(">=") ||
+            if (
+                    //查询类
+                    key.StartsWith(">=") ||
                     key.StartsWith("<=") ||
+                    //不等于
+                    key.StartsWith("<>") ||
+                    //操作类
                     key.StartsWith("+=") ||
                     key.StartsWith("=+") ||
                     key.StartsWith("-=") ||

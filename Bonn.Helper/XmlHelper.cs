@@ -77,9 +77,19 @@ namespace Bonn.Helper
         /// 将一个对象序列化为XML字符串
         /// </summary>
         /// <param name="o">要序列化的对象</param>
-        /// <param name="encoding">编码方式</param>
         /// <returns>序列化产生的XML字符串</returns>
-        public static string XmlSerialize(object o, Encoding encoding)
+        public static string XmlSerialize(object o)
+        {
+            return XmlSerialize(o, Encoding.Default);
+        }
+
+        /// <summary>
+            /// 将一个对象序列化为XML字符串
+            /// </summary>
+            /// <param name="o">要序列化的对象</param>
+            /// <param name="encoding">编码方式</param>
+            /// <returns>序列化产生的XML字符串</returns>
+            public static string XmlSerialize(object o, Encoding encoding)
         {
             using (MemoryStream stream = new MemoryStream())
             {
